@@ -2,7 +2,7 @@
 #include <DRV8835.h>
 
 DRV8835 motors(8, 6, 7, 5, true);
-HC020K LeftEncoder(2);
+HC020K LeftEncoder(12);
 HC020K RightEncoder(2);
 
 void countLeft(){
@@ -27,10 +27,13 @@ void setup() {
 }
 
 void loop() {
+  motors.setSpeed(0, 200);
+  motors.setSpeed(1, 200);
+  
   // put your main code here, to run repeatedly:
   Serial.print("Left Rotations: ");
   Serial.print(LeftEncoder.getTicks());
-  Serial.print("Right Rotations: ");
+  Serial.print("\tRight Rotations: ");
   Serial.print(RightEncoder.getTicks());
   Serial.print("\n");
 }
