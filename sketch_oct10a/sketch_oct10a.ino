@@ -2,8 +2,8 @@
 #include <DRV8835.h>
 
 DRV8835 motors(8, 6, 7, 5, true);
-HC020K LeftEncoder(12);
-HC020K RightEncoder(2);
+HC020K LeftEncoder(2);
+HC020K RightEncoder(3);
 
 void countLeft(){
     LeftEncoder.countTicks();
