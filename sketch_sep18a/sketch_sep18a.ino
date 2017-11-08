@@ -10,6 +10,9 @@
 #define KP 1
 #define MAX_DISTANCE 200
 
+//Sonar definitions
+#define WALL_DISTANCE_THRESHOLD 50
+
 /**
  * EXTREMELY IMPORTANT!!!
  * 
@@ -33,6 +36,29 @@ void counterL() {
 
 void counterR() {
   enc2.countTicks();
+}
+
+boolean isTooCloseTooWall() {
+  //Returns true if the sonar reads a value below a certain threshold, called WALL_DISTANCE_THRESHOLD
+  //Otherwise return false
+}
+
+void rotateRight(){
+  //In a while loop structure:
+  //Will read in gyroscope values using CurieIMU.readGyro(int gx, int gy, int gz), where gx, gy, gz are defined in this function before calling readGyro
+  //To convert any of the raw values in angular velocity (°/s) use the following formula: 
+  //float av = ( avRaw/32768.9)*getGyroRange() 
+  //where avRaw is either gx, gy or gz. 
+  //Set speed of right motor to 0
+  //Set speed of left to some default, maybe 100 defined above
+  //Check if that av value is between certain degrees, for example 85<theta<95 is aceptable for a right hand turn
+  //If we reach within this threshold, break out of while loop, return
+  //Otherwise keep rotationg, stay in while loop
+}
+
+void rotateLeft(){
+  //Very similar to rotateRight(), except eft motor is now set to 0.
+  //Right motor is now set to default
 }
 
 void setup() {
@@ -90,34 +116,24 @@ void loop() {
   //for (int i=0; i<2; i++) {
   //  motors.setSpeed(i, 0);
   //}
+
+  Serial.print("Ping: ");
+  Serial.print(sonar.ping_cm());
+  Serial.println("cm");
+
   delay(200);
 
-    Serial.print("Ping: ");
-    Serial.print(sonar.ping_cm());
-    Serial.println("cm");
+  if(isTooCloseToWall()) {
+    rotateRight();
+    if(isTooCloseToWall()){
+      for(i=0;i<2;i++){
+        rotateRight();
+      }
+      if(isTooCloseToWall){
+        rotateLeft();
+      }
+    }
+  }
 
   
-
-  // Uncomment these to see the motors move in all four direction combinations
-//  motors.setSpeed(0, speed);
-//  motors.setSpeed(1, -speed);
-//  delay(1000);
-//  for (int i=0; i<2; i++) {
-//    motors.setSpeed(i, 0);
-//  }
-//  delay(500);
-//  motors.setSpeed(0, -speed);
-//  motors.setSpeed(1, -speed);
-//  delay(1000);
-//  for (int i=0; i<2; i++) {
-//    motors.setSpeed(i, 0);
-//  }
-//  delay(500);
-//  motors.setSpeed(0, -speed);
-//  motors.setSpeed(1, speed);
-//  delay(1000);
-//  for (int i=0; i<2; i++) {
-//    motors.setSpeed(i, 0);
-//  }
-//  delay(2000);
 }
