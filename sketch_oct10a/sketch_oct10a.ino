@@ -1,5 +1,6 @@
 #include <HC020K.h>
 #include <DRV8835.h>
+#include <CurieIMU.h>
 
 DRV8835 motors(8, 6, 7, 5, true);
 HC020K LeftEncoder(2);

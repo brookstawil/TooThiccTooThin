@@ -1,3 +1,5 @@
+#include <BMI160.h>
+#include <CurieIMU.h>
 #include <DRV8835.h>
 #include <HC020K.h>
 
